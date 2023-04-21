@@ -7,5 +7,5 @@ test: Test.c
 	./test
 
 clean: 
-	rm program
-	rm test
+	rm -f program
+	rm -f test
