@@ -43,7 +43,7 @@ void parallel_depth(int x[], int start, int end, int depth, int maxThreadDepth) 
         a->depth = depth+1;
         a->maxThreadDepth=maxThreadDepth;
         pthread_create(&t, NULL, thread_merge_depth, (void*)a);
-        thread_count++; 
+        // thread_count++; // for debugging
 
         // run thread 2
         parallel_depth(x, mid+1, end, depth+1, maxThreadDepth);
@@ -62,31 +62,6 @@ void* thread_merge(void* args) {
     merge_sort(a->x, a->start, a->end);
     return NULL;
 }
-
-void parallel_subarray(int x[], int start, int end, int nrThreads) {
-    pthread_t threads[nrThreads];
-    ThreadArgs *thread_args = (ThreadArgs*)malloc(sizeof(ThreadArgs) * nrThreads); 
-    int full_len = end - start; 
-    int len = full_len / nrThreads; 
-    for(int t = 0; t < nrThreads; t++) {
-        ThreadArgs *args = thread_args + t; 
-        args->x = x;
-        args->start = len * t;
-        args->end = (t == nrThreads-1) ? end : (args->start + len) - 1;
-        pthread_create(&threads[t], NULL, thread_merge, (void*)args);
-    }
-
-    for(int t = 0; t < nrThreads; t++) {
-        pthread_join(threads[t], NULL);
-    }
-    for(int t = 0; t < nrThreads; t++) {
-        int t_start = t * len; 
-        int t_end = (t == nrThreads-1) ? end : (t_start + len) -1;
-        merge(x, start, t_start, t_end);
-    }
-
-    free(thread_args);
-} 
 
 void parallel_sort(int x[], int start, int end, int nrThreads) {
     int maxThreadDepth = (int)log2(nrThreads);
