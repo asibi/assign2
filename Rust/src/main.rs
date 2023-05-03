@@ -1,10 +1,18 @@
 mod mergesort;
-use std::fs;
+use std::{fs, env};
 use std::time::Instant;
 
 fn main() {
 
-    let mut numbers = read_file("test-data.txt");    
+    let args: Vec<String> = env::args().collect();
+    
+    let file_path = &args[1];
+    let num_threads = args[2].parse::<i32>().expect("Invalid threads argument");
+
+    const VALID_NUM_THREADS: [i32; 6] = [1, 2, 4, 8, 16, 32];    
+    assert!(VALID_NUM_THREADS.contains(&num_threads), "Invalid number of threads");
+
+    let mut numbers = read_file(file_path);    
 
     const THREADS: i32 = 1;
     let now = Instant::now();
