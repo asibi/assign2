@@ -48,7 +48,6 @@ int main(int argc, char** argv) {
     measure(parallel_sort, x, 0, N-1, nrThreads);
 
     // Info
-    print_nr_threads();
     assert(isSorted(x, N));
 
     // Clean
