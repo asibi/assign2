@@ -42,8 +42,6 @@ func main() {
 		panic(err)
 	}
 
-	// nums := RandomInts(0, 1000000, n)
-
 	path := os.Args[1]
 
 	file, err := os.Open(path)
