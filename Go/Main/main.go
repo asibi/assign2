@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"os"
 	"strconv"
@@ -30,23 +31,51 @@ func measure(sortFunc func([]int, int, int, int), nums []int, start int, end int
 }
 
 func main() {
-	if len(os.Args) != 2 {
-		fmt.Print("must provide number of threads\n")
+	if len(os.Args) != 3 {
+		fmt.Print("First argument should be path to file\n")
+		fmt.Print("Second argument should be number of threads\n")
 		return
 	}
 
-	nrThreads, err := strconv.Atoi(os.Args[1])
+	nrThreads, err := strconv.Atoi(os.Args[2])
 	if err != nil {
 		panic(err)
 	}
-	n := 10000000
 
-	nums := RandomInts(0, 1000000, n)
+	// nums := RandomInts(0, 1000000, n)
 
-	measure(paralell_sort, nums, 0, n-1, nrThreads)
+	path := os.Args[1]
+
+	file, err := os.Open(path)
+	if err != nil {
+		fmt.Println("Error opening file:", err)
+		return
+	}
+	defer file.Close()
+
+	scanner := bufio.NewScanner(file)
+
+	var numbers []int
+
+	for scanner.Scan() {
+		line := scanner.Text()
+		num, err := strconv.Atoi(line)
+		if err != nil {
+			fmt.Println("Error parsing number:", err)
+			return
+		}
+		numbers = append(numbers, num)
+	}
+
+	if err := scanner.Err(); err != nil {
+		fmt.Println("Error scanning file:", err)
+		return
+	}
+
+	measure(paralell_sort, numbers, 0, len(numbers)-1, nrThreads)
 	print_nr_threads()
 
-	if !isSorted(nums) {
+	if !isSorted(numbers) {
 		fmt.Print("not sorted\n")
 		return
 	}
