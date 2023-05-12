@@ -129,12 +129,12 @@ int main(int argc, char** argv) {
     assert(output_dir_status.type() == fs::file_type::directory && "Output path is not a directory");
 
 
-    const size_t size_levels[8] = {
+    const size_t size_levels[5] = {
         64, // 2^6
         1'024, // 2^10
         16'384, // 2^14
         262'144, // 2^18
-        4'194'304, // 2^22
+        4'194'304 // 2^22
     };
 
     const double inversion_levels[5] = { 0, 0.25, 0.5, 0.75, 1 };
