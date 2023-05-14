@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <time.h>
-#include<stdbool.h>  
+#include <stdbool.h>  
 #include <assert.h>
 #include "MergeSort.h"
 #include "Parallel.h"
@@ -43,7 +43,7 @@ int* read_data(char *path, int *N) {
     int *arr = (int*) malloc(capacity * sizeof(int));
 
     if(file == NULL) {
-        printf("Not able to open the file.");
+        printf("Not able to open the file\n");
         exit(1);
     }
 
