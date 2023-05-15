@@ -1,11 +1,35 @@
 package Java;
-import java.util.Random; 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.Scanner; 
 
 class Main {
+
+    public static int[] read_data(String path) {
+        List<Integer> list = new ArrayList<Integer>(); 
+
+        try {
+            Scanner scanner = new Scanner(new File(path)); 
+            
+            while(scanner.hasNextInt()) {
+                list.add(scanner.nextInt());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list.stream().mapToInt(i -> i).toArray(); 
+    }
+
+    // arguments: <path to workload file> <num. threads> 
     public static void main(String[] args) {
-        int x[] = randomArray(1000000);
-        assert(args.length == 1);
-        int nrThreads = Integer.parseInt(args[0]); 
+        // Handle arguments
+        assert(args.length == 2);
+        String path = args[0];
+        int nrThreads = Integer.parseInt(args[1]); 
+
+        int x[] = read_data(path);
         assert(!isSorted(x));
 
         // Measure

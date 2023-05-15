@@ -1,0 +1,3 @@
+.vscode/
+WorkloadGenerator/workloads/
+WorkloadGenerator/*.exe
