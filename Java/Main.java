@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner; 
+import java.io.FileReader;
+import java.io.BufferedReader;
 
 class Main {
 
@@ -11,10 +13,12 @@ class Main {
         List<Integer> list = new ArrayList<Integer>(); 
 
         try {
-            Scanner scanner = new Scanner(new File(path)); 
-            
-            while(scanner.hasNextInt()) {
-                list.add(scanner.nextInt());
+            FileReader fr = new FileReader(path);
+            BufferedReader br = new BufferedReader(fr);
+            String line;
+            while ((line = br.readLine()) != null) {
+                int number = Integer.parseInt(line);
+                list.add(number);
             }
         } catch (Exception e) {
             e.printStackTrace();
