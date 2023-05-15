@@ -29,9 +29,8 @@ double measure(void (*f)(int*, int, int, int), int* x, int start, int end, int n
     // Handle time
     double time_spent_ms = (end_time.tv_sec - start_time.tv_sec) * 1000;
     time_spent_ms += (end_time.tv_nsec - start_time.tv_nsec) / 1000000.0;
-    double time_spent = time_spent_ms;
-    printf("%.3f ms\n", time_spent);
-    return time_spent;
+    printf("%.2f\n", time_spent_ms);
+    return time_spent_ms;
 }
 
 // return array, always allocate multiple of 2

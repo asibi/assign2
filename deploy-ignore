@@ -1,0 +1,12 @@
+.git/
+.vscode
+.gitignore
+.git
+Rust/target
+WorkloadGenerator/
+.exe
+.out
+test
+Test
+deploy.sh
+deploy-ignore

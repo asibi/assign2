@@ -17,15 +17,16 @@ func isSorted(nums []int) bool {
 	return true
 }
 
-func measure(sortFunc func([]int, int, int, int), nums []int, start int, end int, nrThreads int) int64 {
+func measure(sortFunc func([]int, int, int, int), nums []int, start int, end int, nrThreads int) float64 {
 	before := time.Now()
 
 	// Run
 	sortFunc(nums, start, end, nrThreads)
 
 	after := time.Now()
-	time_spent := after.Sub(before).Milliseconds()
-	fmt.Printf("%.3d ms\n", time_spent)
+	elapsed := after.Sub(before)
+	time_spent := float64(elapsed.Nanoseconds()) / 1000000.0
+	fmt.Printf("%.2f\n", time_spent)
 
 	return time_spent
 }
@@ -73,7 +74,7 @@ func main() {
 	}
 
 	measure(paralell_sort, numbers, 0, len(numbers)-1, nrThreads)
-	print_nr_threads()
+	// print_nr_threads()
 
 	if !isSorted(numbers) {
 		fmt.Print("not sorted\n")

@@ -40,7 +40,7 @@ class Main {
         assert(isSorted(x));
         long elapsedNanos = endTime - startTime;
         double elapsedMillis = (double) elapsedNanos / 1_000_000.0;
-        System.out.printf("%.3f ms%n", elapsedMillis);
+        System.out.printf("%.2f%n", elapsedMillis);
         // Parallel.printThreadCount();
     }
 

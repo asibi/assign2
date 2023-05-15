@@ -17,7 +17,8 @@ fn main() {
     const THREADS: i32 = 1;
     let now = Instant::now();
     mergesort::sort(&mut numbers, (THREADS as f64).log2().ceil() as i32);
-    println!("{}", now.elapsed().as_millis());
+    let time = now.elapsed().as_millis() as f64 + now.elapsed().subsec_nanos() as f64 / 1000000.0;
+    println!("{0:.2}", time);
 }
 
 
