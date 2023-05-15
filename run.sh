@@ -1,17 +1,19 @@
 #!/bin/bash
 set -e
 
-projects=(C Java)
-thread_levels=(1 2 4 8 16 32)
-workload_sizes=(64 1024 16384 262144 4194304)
+projects=(C Java Rust go)
+thread_levels=(2) # (1 2 4 8 16 32)
+workload_sizes=(64) # 1024 16384 262144 4194304)
 workload_inversion_ratios=(0 25 50 75 100)
-runs=1
+runs=1 #6
 perf_stats=(
-    instructions 
-    cycles 
-    cache-misses 
-    stalled-cycles-frontend 
-    stalled-cycles-backend
+    # instructions 
+    # cycles 
+    context-switches
+    #cache-misses 
+    L1-dcache-load-misses
+    # stalled-cycles-frontend 
+    # stalled-cycles-backend
 )
 
 workloads_dir="$(realpath Workloads)"
@@ -33,19 +35,19 @@ for perf_stat in "${perf_stats[@]:1}"; do
     perf_stats_string="${perf_stats_string},${perf_stat}"
 done
 
-echo
-# Building projects
-for project in "${projects[@]}"; do
-    echo "Building ${project}"
-    cd "${project}"
-    ./build.sh
-    cd ..
-done
-
 #TODO: Append headers
 result_header="project, size, inversion-ratio, thr  eads, run, time"
 for perf_stat in "${perf_stats[@]}"; do
     result_header="${result_header}, ${perf_stat}"
+done
+
+echo
+# Building projects
+for project in C Java; do
+    echo "Building ${project}"
+    cd "${project}"
+    ./build.sh
+    cd ..
 done
 
 echo
