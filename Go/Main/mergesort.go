@@ -1,10 +1,5 @@
 package main
 
-import (
-	"math/rand"
-	"time"
-)
-
 func merge(nums []int, start int, mid int, end int) {
 	n1 := mid - start + 1
 	n2 := end - mid
@@ -50,19 +45,4 @@ func merge_sort(nums []int, start int, end int) {
 		merge_sort(nums, mid+1, end)
 		merge(nums, start, mid, end)
 	}
-}
-
-func RandomInts(min, max, size int) []int {
-	// Initialize a new random seed
-	rand.Seed(time.Now().UnixNano())
-
-	// Create a slice of the given size
-	nums := make([]int, size)
-
-	// Fill the slice with random integers in the given range
-	for i := 0; i < size; i++ {
-		nums[i] = rand.Intn(max-min) + min
-	}
-
-	return nums
 }
