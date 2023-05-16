@@ -12,17 +12,12 @@ if [[ ! -f "$1" ]]; then
     exit 1
 fi
 
-files=( $(find * -type f | grep -vf deploy-ignore) )
-
-#echo "${files[@]}"
-
-target_folder="csp-assignment-2"
-
-#scp -i "$1" "run.sh" group05@dasya1.itu.dk:~/"${target_folder}"/run.sh "deploy.sh" group05@dasya1.itu.dk:~/"${target_folder}"/deploy-ignore.sh
 
 files=(
     C/ Rust/ Java/ Go/ Workloads/ run.sh
 )
+
+target_folder="csp-assignment-2"
 
 ssh -i "$1" -t group05@dasya1.itu.dk "rm -rf ${target_folder}; mkdir ${target_folder}"
 

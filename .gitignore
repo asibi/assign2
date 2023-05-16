@@ -3,3 +3,4 @@ WorkloadGenerator/workloads/
 WorkloadGenerator/*.exe
 Rust/target/
 Java/out/
+*.class
