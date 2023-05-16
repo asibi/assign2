@@ -14,9 +14,8 @@ fn main() {
 
     let mut numbers = read_file(file_path);    
 
-    const THREADS: i32 = 1;
     let now = Instant::now();
-    mergesort::sort(&mut numbers, (THREADS as f64).log2().ceil() as i32);
+    mergesort::sort(&mut numbers, (num_threads as f64).log2().ceil() as i32);
     let time = now.elapsed().as_millis() as f64 + now.elapsed().subsec_nanos() as f64 / 1000000.0;
     println!("{0:.2}", time);
 }
