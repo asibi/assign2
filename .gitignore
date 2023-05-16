@@ -1,3 +1,5 @@
 .vscode/
 WorkloadGenerator/workloads/
 WorkloadGenerator/*.exe
+Rust/target/
+Java/out/
