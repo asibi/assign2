@@ -51,7 +51,7 @@ echo
 echo "Running tests"
 
 # Append headers to result file
-result_header="project, size, inversion-ratio, thr  eads, run, time"
+result_header="project, size, inversion-ratio, threads, run, time"
 for perf_stat in "${perf_stats[@]}"; do
     result_header="${result_header}, ${perf_stat}"
 done
