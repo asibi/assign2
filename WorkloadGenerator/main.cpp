@@ -128,7 +128,6 @@ int main(int argc, char** argv) {
     fs::file_status output_dir_status = fs::status(output_dir);
     assert(output_dir_status.type() == fs::file_type::directory && "Output path is not a directory");
 
-
     const size_t size_levels[5] = {
         64, // 2^6
         1'024, // 2^10
