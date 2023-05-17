@@ -20,6 +20,6 @@ Local Linux machine:
 ./deploy.sh
 ```
 
-**Generate workloads**
+**Generate workloads**  
 Compile `WorkloadGenerator/main.cpp` and run the output file.
 The workload variations (size and inverstion ratio) can be changedin in `main.cpp`.
